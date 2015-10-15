@@ -1,0 +1,16 @@
+{
+    "name": "geekhub/roma",
+    "description": "composer homework",
+    "require": {
+        "php": "^5.5",
+        "guzzlehttp/guzzle": "^6.1",
+        "twig/twig": "^1.22",
+        "nesbot/carbon": "^1.20"
+    },
+    "authors": [
+        {
+            "name": "Roma Paliy",
+            "email": "romapaliy@gmail.com"
+        }
+    ]
+}

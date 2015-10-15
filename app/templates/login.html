@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home page</title>
+    </head>
+    <body>
+
+        {% if login == false %}
+        <h1>Login Docebo</h1>
+            <form action="" method="post">
+                <input type="text" name="login" placeholder="login">
+                <input type="text" name="password" placeholder="password">
+                <input type="submit" value="submit">
+            </form>
+
+            <h1>Login: romapaliy@gmail.com</h1>
+            <h1>Password: a123456</h1>
+
+        {% else %}
+
+            <h1>User info</h1>
+
+            <h3>First name: {{firstname}}</h3>
+
+            <h3>Last name: {{lastname}}</h3>
+
+            <h3>E-mail: {{email}}</h3>
+
+
+            <h1>You login at {{today}}</h1>
+
+
+
+            <h1><a href="/logout">Logout</a></h1>
+
+    {% endif %}
+
+    </body>
+</html>
