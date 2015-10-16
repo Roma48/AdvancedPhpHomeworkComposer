@@ -3,6 +3,7 @@
     "description": "composer homework",
     "require": {
         "php": "^5.5",
+        "ext-curl": "*",
         "guzzlehttp/guzzle": "^6.1",
         "twig/twig": "^1.22",
         "nesbot/carbon": "^1.20"
