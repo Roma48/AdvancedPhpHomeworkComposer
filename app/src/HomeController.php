@@ -15,7 +15,6 @@ class HomeController
     {
         session_start();
         if (isset($_POST['login']) && $_POST['password']) {
-
             $client = new GuzzleHttp\Client();
             $result = $client->post('http://geekhub.docebosaas.com/api/user/authenticate', ['form_params' => [
                 'username' => $_POST['login'],
@@ -25,9 +24,8 @@ class HomeController
             $this->getUser($result->getStatusCode());
 
         } else {
-            $template = new TemplateLoader();
-            $render = $template->getTemplate('login.html');
-            if(isset($_SESSION['docebo_name'])){
+            $render = $this->getTemplate('login.html');
+            if (isset($_SESSION['docebo_name'])) {
                 $today = \Carbon\Carbon::now();
                 echo $render->render([
                     'login' => true,
@@ -42,7 +40,8 @@ class HomeController
         }
     }
 
-    public function getUser($status){
+    public function getUser($status)
+    {
         if ($status === 200) {
             $get_user = new GuzzleHttp\Client();
             $secret = 'WEFEpcGFWIq!ya7au-t-Krt_JnJKD6_o9K*l';
@@ -59,8 +58,7 @@ class HomeController
             $_SESSION['docebo_name'] = $json->firstname;
             $_SESSION['docebo_last'] = $json->lastname;
             $_SESSION['docebo_email'] = $json->email;
-            $template = new TemplateLoader();
-            $render = $template->getTemplate('login.html');
+            $render = $this->getTemplate('login.html');
             $today = \Carbon\Carbon::now();
             echo $render->render([
                 'login' => true,
@@ -72,6 +70,14 @@ class HomeController
         } else {
             header("Location: /home");
         }
+    }
+
+    public function getTemplate($name)
+    {
+        Twig_Autoloader::register();
+        $loader = new Twig_Loader_Filesystem('app/templates');
+        $twig = new Twig_Environment($loader, []);
+        return $twig->loadTemplate($name);
     }
 
 }
